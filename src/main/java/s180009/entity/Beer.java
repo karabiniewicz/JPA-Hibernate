@@ -10,8 +10,8 @@ import java.io.Serializable;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @Entity
-@Table(name = "mages")
-public class Mage implements Serializable {
+@Table(name = "beers")
+public class Beer implements Serializable {
 
     @Id
     @Getter
@@ -19,20 +19,20 @@ public class Mage implements Serializable {
 
     @Getter
     @Setter
-    private int level;
+    private long price;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "tower")
-    private Tower tower;
+    @JoinColumn(name = "brewery")
+    private Brewery brewery;
 
     @Override
     public String toString() {
-        return "Mage{" +
+        return "Beer{" +
                 "name='" + name + '\'' +
-                ", level=" + level +
-                ", tower=" + tower.getName() +
+                ", price=" + price +
+                ", brewery=" + brewery.getName() +
                 '}';
     }
 }

@@ -1,36 +1,36 @@
 package s180009.view;
 
-import s180009.entity.Mage;
-import s180009.entity.Tower;
-import s180009.service.MageService;
-import s180009.service.TowerService;
+import s180009.entity.Beer;
+import s180009.entity.Brewery;
+import s180009.service.BeerService;
+import s180009.service.BreweryService;
 
 public class DataView implements View{
 
-    private final MageService mageService;
+    private final BeerService beerService;
 
-    private final TowerService towerService;
+    private final BreweryService breweryService;
 
-    public DataView(MageService mageService, TowerService towerService) {
-            this.mageService = mageService;
-            this.towerService = towerService;
+    public DataView(BeerService beerService, BreweryService breweryService) {
+            this.beerService = beerService;
+            this.breweryService = breweryService;
     }
 
     @Override
     public void display() {
 
-        System.out.print("Mages:\n");
-        for (Mage mage: mageService.findAllMages()) {
-            System.out.println(mage);
+        System.out.print("Beers:\n");
+        for (Beer beer : beerService.findAllBeers()) {
+            System.out.println(beer);
         }
         System.out.println();
 
-        System.out.print("Tower:\n");
-        for (Tower tower: towerService.findAllTowers()) {
-            System.out.println(tower);
-            System.out.print("\tMages in tower:\n");
-            for (Mage mage: mageService.findAllMagesInTower(tower)) {
-                System.out.println("\t\t" + mage);
+        System.out.print("Breweries:\n");
+        for (Brewery brewery : breweryService.findAllBreweries()) {
+            System.out.println(brewery);
+            System.out.print("\tBeers in brewery:\n");
+            for (Beer beer : beerService.findAllBeersInBrewery(brewery)) {
+                System.out.println("\t\t" + beer);
             }
         }
         System.out.println();

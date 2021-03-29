@@ -1,10 +1,10 @@
 package s180009;
 
 import s180009.initialize.InitializeTestData;
-import s180009.repositories.MageRepository;
-import s180009.repositories.TowerRepository;
-import s180009.service.MageService;
-import s180009.service.TowerService;
+import s180009.repositories.BeerRepository;
+import s180009.repositories.BreweryRepository;
+import s180009.service.BeerService;
+import s180009.service.BreweryService;
 import s180009.view.*;
 
 import javax.persistence.EntityManagerFactory;
@@ -16,10 +16,10 @@ public class Main {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("lab4Pu");
 
-        MageService mageService = new MageService(new MageRepository(entityManagerFactory));
-        TowerService towerService = new TowerService(new TowerRepository(entityManagerFactory));
+        BeerService beerService = new BeerService(new BeerRepository(entityManagerFactory));
+        BreweryService breweryService = new BreweryService(new BreweryRepository(entityManagerFactory));
 
-        InitializeTestData initializeTestData = new InitializeTestData(mageService, towerService);
+        InitializeTestData initializeTestData = new InitializeTestData(beerService, breweryService);
         initializeTestData.init();
 
         Scanner scanner = new Scanner(System.in);
@@ -28,29 +28,29 @@ public class Main {
             System.out.print("command: ");
             String command = scanner.next();
             switch (command) {
-                case "addMag":
-                    new MageAdd(mageService, towerService).display();
+                case "BeerAdd":
+                    new BeerAdd(beerService, breweryService).display();
                     break;
-                case "delMag":
-                    new MageDelete(mageService, towerService).display();
+                case "BeerDelete":
+                    new BeerDelete(beerService, breweryService).display();
                     break;
-                case "addTower":
-                    new TowerAdd(mageService, towerService).display();
+                case "BreweryAdd":
+                    new BreweryAdd(beerService, breweryService).display();
                     break;
-                case "delTower":
-                    new TowerDelete(mageService, towerService).display();
+                case "BreweryDelete":
+                    new BreweryDelete(beerService, breweryService).display();
                     break;
                 case "viewAll":
-                    new DataView(mageService, towerService).display();
+                    new DataView(beerService, breweryService).display();
                     break;
-                case "magesWithHigherLevel":
-                    new MagesWithHigherLevel(mageService, towerService).display();
+                case "BeersWithLowerPrice":
+                    new BeersWithLowerPrice(beerService, breweryService).display();
                     break;
                 case "quit":
                     exit = true;
                     break;
                 default:
-                    System.out.println("addMag|delMag|addTower|delTower|viewAll|magesWithHigherLevel||quit");
+                    System.out.println("BeerAdd|BeerDelete|BreweryAdd|BreweryDelete|viewAll|BeersWithLowerPrice||quit");
             }
             System.out.println();
         }

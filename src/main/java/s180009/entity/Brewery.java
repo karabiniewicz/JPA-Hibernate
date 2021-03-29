@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode
 @Entity
-@Table(name = "towers")
-public class Tower implements Serializable {
+@Table(name = "breweries")
+public class Brewery implements Serializable {
 
     @Id
     @Getter
@@ -21,27 +21,18 @@ public class Tower implements Serializable {
 
     @Getter
     @Setter
-    private int height;
+    private long value;
 
     @Getter
     @Setter
     @OneToMany(mappedBy = "name", cascade = CascadeType.REMOVE)
-    private List<Mage> mages = new ArrayList<>();
+    private List<Beer> beers = new ArrayList<>();
 
     @Override
     public String toString() {
-        return "Tower{" +
+        return "Brewery{" +
                 "name='" + name + '\'' +
-                ", height=" + height +
+                ", value=" + value +
                 '}';
     }
-
-//    private String magesInTowerToString() {
-//        String s ="";
-//        System.out.println(mages.size());
-//        for (Mage mage : mages) {
-//            s += mage;
-//        }
-//        return s;
-//    }
 }
